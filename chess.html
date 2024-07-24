@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+   
+</head>
+<style>
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+#gameBoard {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #3c3c3c;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+}
+
+.cell:nth-child(even) {
+    background-color: #8d8d8d;
+}
+
+.cell:nth-child(odd) {
+    background-color: #bbb;
+}
+
+.piece {
+    font-size: 40px;
+}
+
+.piece:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Chess Game</h1>
+        <form id="playersForm">
+            <label for="player1">Player One Name:</label>
+            <input type="text" id="player1" required>
+            <label for="player2">Player Two Name:</label>
+            <input type="text" id="player2" required>
+            <button type="submit">Start Game</button>
+        </form>
+        <div id="gameBoard"></div>
+    </div>
+
+    <script>
+
+let currentPlayer = 1; // Player 1 starts the game
+let player1Name = '';
+let player2Name = '';
+
+document.addEventListener('DOMContentLoaded', function() {
+    const playersForm = document.getElementById('playersForm');
+    const gameBoard = document.getElementById('gameBoard');
+
+    playersForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        player1Name = document.getElementById('player1').value;
+        player2Name = document.getElementById('player2').value;
+
+        // Initialize the game board
+        initializeBoard();
+    });
+
+    function initializeBoard() {
+        gameBoard.innerHTML = ''; // Clear the board
+        currentPlayer = 1; // Player 1 starts
+
+        // Create 8x8 board
+        for (let i = 0; i < 64; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.dataset.index = i;
+            cell.addEventListener('click', handleCellClick);
+            gameBoard.appendChild(cell);
+        }
+    }
+
+    function handleCellClick() {
+        const index = parseInt(this.dataset.index);
+
+        // Check if the move is valid (for simplicity, assume all moves are valid for now)
+        // Update the board with the current player's piece
+        this.textContent = currentPlayer === 1 ? '♟︎' : '♙'; // Black and white pawns for now
+
+        // Switch players
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+    }
+});
+
+
+    </script>
+</body>
+</html>

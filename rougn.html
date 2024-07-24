@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: appear 1s ease-out;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+        <form id="players-form">
+            <label for="player1">Player 1:</label>
+            <input type="text" id="player1" name="player1" required>
+            <label for="player2">Player 2:</label>
+            <input type="text" id="player2" name="player2" required>
+            <button type="submit">Start Game</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code remains unchanged as in your original code
+        // You can paste the existing JavaScript code here
+
+        
+// Initialize variables
+let currentPlayer = 'X';
+let player1Name = '';
+let player2Name = '';
+let gameActive = false;
+const board = Array.from(Array(3), () => new Array(3).fill(''));
+
+// Select elements
+const form = document.getElementById('players-form');
+const gameBoard = document.getElementById('game-board');
+const result = document.getElementById('result');
+
+// Handle form submission
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    player1Name = document.getElementById('player1').value;
+    player2Name = document.getElementById('player2').value;
+    form.style.display = 'none'; // Hide form after submission
+    startGame();
+});
+
+// Start game function
+function startGame() {
+    gameActive = true;
+    renderBoard();
+}
+
+// Render game board
+function renderBoard() {
+    gameBoard.innerHTML = '';
+    board.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            const cellDiv = document.createElement('div');
+            cellDiv.classList.add('cell');
+            cellDiv.dataset.row = rowIndex;
+            cellDiv.dataset.col = colIndex;
+            cellDiv.textContent = board[rowIndex][colIndex] || '';
+            cellDiv.addEventListener('click', handleClick);
+            gameBoard.appendChild(cellDiv);
+        });
+    });
+}
+
+// Handle cell click
+function handleClick(event) {
+    const { row, col } = event.target.dataset;
+    if (board[row][col] === '' && gameActive) {
+        board[row][col] = currentPlayer;
+        event.target.textContent = currentPlayer;
+        if (checkWinner()) {
+            gameActive = false;
+            result.textContent = `${currentPlayer === 'X' ? player1Name : player2Name} wins!`;
+            result.style.animation = 'winner 2s ease-in-out';
+        } else if (checkDraw()) {
+            gameActive = false;
+            result.textContent = 'It\'s a draw!';
+        } else {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+    }
+}
+
+// Check for a winner
+function checkWinner() {
+    for (let i = 0; i < 3; i++) {
+        if (board[i][0] !== '' && board[i][0] === board[i][1] && board[i][0] === board[i][2]) {
+            return true;
+        }
+        if (board[0][i] !== '' && board[0][i] === board[1][i] && board[0][i] === board[2][i]) {
+            return true;
+        }
+    }
+    if (board[0][0] !== '' && board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
+        return true;
+    }
+    if (board[0][2] !== '' && board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
+        return true;
+    }
+    return false;
+}
+
+// Check for a draw
+function checkDraw() {
+    return board.every(row => row.every(cell => cell !== ''));
+}
+
+    </script>
+</body>
+</html>

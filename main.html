@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Add CSS for the carousel */
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            height: 85vh; /* Set height to 85% of viewport height */
+            position: relative;
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: -3px;
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+            height: 100%; /* Set height to 100% of carousel container */
+        }
+
+        .carousel-item {
+            display: flex;
+            flex: none;
+            width: 100%;
+            height: 100%; /* Set height to 100% of carousel container */
+            align-items: center;
+            justify-content: center; /* Center items horizontally */
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 80%; /* Make the image larger */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 20%; /* Make the image round */
+            box-shadow: 0 0 20px rgba(116, 87, 87, 0.1); /* Add shadow */
+            animation: zoomIn 10s infinite; /* Add animation */
+        }
+
+        .carousel-item .carousel-text {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif; /* Apply Arial font family */
+            text-align: center; /* Center text */
+            color: white; /* Change text color to white */
+        }
+
+        .carousel-item .carousel-text h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: white; /* Change text color to white */
+            margin-top: 20px;
+        }
+
+        .carousel-item .carousel-text h6 {
+            margin-bottom: 5px;
+            font-size: 50px;
+            color: white; /* Change text color to white */
+        }
+
+        .carousel-item .carousel-text p {
+            font-size: 20px;
+            color: white; /* Change text color to white */
+        }
+
+        .carousel-item .carousel-text .hire-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #070707;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .carousel-item .carousel-text .hire-button:hover {
+       
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-item:nth-child(2) {
+            justify-content: flex-start; /* Align text to the left */
+        }
+
+        .carousel-item:nth-child(2) img {
+            width: 30%; /* Adjust the size of the image */
+            height: auto; /* Maintain aspect ratio */
+            position: absolute;
+            right: 20px; /* Align image to the right */
+            border-radius: 20%; /* Add border-radius */
+            height: 120%;
+        }
+
+        .carousel-item:nth-child(2) .carousel-text {
+            width: 50%; /* Ensure text takes the remaining space */
+            text-align: left; /* Align text to the left */
+            padding-left: 20px; /* Add padding */
+        }
+
+        /* Carousel indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            display: flex;
+            justify-content: center;
+            transform: translateX(-50%);
+        }
+
+        .carousel-indicators div {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-indicators div.active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            margin-right: 10px;
+        }
+
+        .footer-section a:hover {
+            color: #f0f0f0;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feedback-form input[type="text"],
+        .feedback-form input[type="email"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .feedback-form input[type="submit"] {
+            background-color: #070707;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #ffffff;
+        }
+        .carousel-item:nth-child(2) .carousel-text,
+.carousel-item:nth-child(3) .carousel-text {
+    font-family: 'YourFontName', Arial, sans-serif;
+}
+
+/* Popup form styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-content button {
+    background-color: #070707;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+.popup-content button:hover {
+    background-color: #ffffff;
+    color: black;
+}
+
+/* Styles for Play Game button */
+.play-game-button {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Adjust margin as needed */
+}
+
+.play-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #070707;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.play-button:hover {
+    background-color: #ffffff;
+    color: black;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="image/msu-removebg-preview (1).png" alt="Logo" class="logo">
+            </div>
+            <div class="navbar-middle">
+                <a href="#home"><i class="fas fa-home"></i> </a>
+                <a href="#services"><i class="fas fa-concierge-bell"></i> Services</a>
+                <a href="#projects"><i class="fas fa-briefcase"></i> Projects</a>
+               
+                <div class="dropdown">
+                    <a href="#contact"><i class="fas fa-envelope"></i> Contact <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content" id="contactDropdown">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                        <!-- Add more social media links as needed -->
+                    </div>
+                </div>
+                
+                <a href="#about"><i class="fas fa-user"></i> About Me</a>
+            </div>
+            <div class="navbar-right">
+                <a href="form.html" class="login-button">Login/Register</a>
+            </div>
+
+
+            <div class="play-game-button">
+                <a href="game.html" class="play-button">Play Game</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="carousel">
+            <div class="carousel-slide">
+                <div class="carousel-item">
+                    <img src="image/slide11-removebg-preview.png" alt="Image 1">
+                    <div class="carousel-text">
+                        <h2>Hi, I'm <span class="change">Anil Sharma</span></h2>
+                        <h6>Website Developer</h6>
+                        <p>"Looking for a skilled web developer? Hire me! "</p>
+                        <a href="#contact" class="hire-button">Hire Me</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-text">
+                        <h3>I enjoy a variety of hobbies including working out to stay fit, listening to music to relax, and catching up on sleep for rejuvenation. Constantly exploring new interests keeps life exciting and fulfilling.
+
+
+
+
+
+
+                        </h3>
+                    </div>
+                    <img src="image/images-removebg-preview.png" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="image/slide2-removebg-preview.png" alt="Image 3">
+                    <div class="carousel-text">
+                       
+                        <p>My core interests lie in web technology and Python. I love exploring the latest advancements in web development, creating innovative solutions, and leveraging Python's versatility for various projects, from web apps to automation scripts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <div data-slide="0" class="active"></div>
+                <div data-slide="1"></div>
+                <div data-slide="2"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup form -->
+    <div class="popup" id="popupForm">
+        <div class="popup-content">
+            <h2>Welcome!</h2>
+            <p>Please login or register to continue.</p>
+            <button onclick="window.location.href='form.html'">Login</button>
+            <button onclick="window.location.href='form.html'">Register</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.carousel-item');
+        const slideCount = slides.length;
+        const slideWidth = slides[0].clientWidth;
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slideContainer = document.querySelector('.carousel-slide');
+            slideContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+            document.querySelectorAll('.carousel-indicators div').forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            document.querySelector(`.carousel-indicators div[data-slide="${index}"]`).classList.add('active');
+        }
+
+        function showNextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            showSlide(currentSlide);
+        }
+
+        document.querySelectorAll('.carousel-indicators div').forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                currentSlide = parseInt(indicator.getAttribute('data-slide'));
+                showSlide(currentSlide);
+            });
+        });
+
+        setInterval(showNextSlide, 3000); // Change slide every 3 seconds
+
+      
+    // Get the dropdown container
+    var dropdownContainer = document.getElementById("contactDropdown");
+
+    // Hide the dropdown content initially
+    dropdownContainer.style.display = "none";
+
+    // Toggle the visibility of the dropdown content when the "Contact" link is clicked
+    document.querySelector('.contact-dropdown a').addEventListener('click', function() {
+        if (dropdownContainer.style.display === "none") {
+            dropdownContainer.style.display = "block";
+        } else {
+            dropdownContainer.style.display = "none";
+        }
+    });
+
+
+      // Toggle the visibility of the dropdown content when the "Contact" link is clicked
+      document.querySelector('.dropdown a').addEventListener('click', function() {
+            var dropdownContainer = document.getElementById("contactDropdown");
+            if (dropdownContainer.style.display === "none") {
+                dropdownContainer.style.display = "block";
+            } else {
+                dropdownContainer.style.display = "none";
+            }
+        });
+
+
+
+
+      
+    // Get the popup element
+    const popup = document.getElementById('popupForm');
+
+    // Function to open the popup
+    function openPopup() {
+        popup.style.display = 'flex';
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        popup.style.display = 'none';
+    }
+
+    // Open the popup automatically after 5 seconds
+    setTimeout(openPopup, 5000);
+
+    // Get the buttons that open and close the popup
+    const openPopupButtons = document.querySelectorAll('.login-button');
+    const loginButton = document.getElementById('loginButton');
+    const registerButton = document.getElementById('registerButton');
+
+    // Event listeners for opening the popup
+    openPopupButtons.forEach(button => {
+        button.addEventListener('click', openPopup);
+    });
+
+    // Event listeners for closing the popup
+    loginButton.addEventListener('click', () => {
+        window.location.href = 'form.html'; // Redirect to login page
+    });
+
+    registerButton.addEventListener('click', () => {
+        window.location.href = 'form.html'; // Redirect to register page
+    });
+
+
+
+
+
+
+
+
+
+    
+    </script>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>Welcome to our website! We are dedicated to providing quality services/products to our customers. Learn more about us <a href="about.html">here</a>.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Find Us</h3>
+            <div class="map-container">
+                <!-- Google Map with your location -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.225868781544!2d88.6043685154309!3d27.210736227943872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37410f0f19d59b6b%3A0xc33519822a8a48b9!2sJholungey%2C%20Sikkim%20737132!5e0!3m2!1sen!2sin!4v1648146372346!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Connect with Us</h3>
+            <div class="social-media">
+                <a href="https://www.facebook.com/yourpage" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"></i></a>
+                <!-- Add more social media icons as needed -->
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Feedback</h3>
+            <div class="feedback-form">
+                <form action="#" method="POST">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required><br>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required><br>
+                    <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" required></textarea><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Popup form -->
+<div class="popup" id="popupForm">
+    <div class="popup-content">
+        <h2>Welcome!</h2>
+        <p>Please login or register to continue.</p>
+        <button id="loginButton">Login</button>
+        <button id="registerButton">Register</button>
+    </div>
+</div>
+
+  
+ 
+    
+</footer>
+
+
+</body>
+</html>

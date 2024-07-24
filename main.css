@@ -1,0 +1,159 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #000000, #6a6a69);
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left .logo {
+    height: 50px;
+}
+
+.navbar-middle a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    margin: 0 10px;
+    display: inline-block;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-middle a i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.navbar-middle a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 4px;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffcc00;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+.navbar-middle a:hover {
+    color: #ffcc00;
+    transform: translateY(-5px);
+}
+
+.navbar-middle a:hover i {
+    transform: rotate(20deg);
+}
+
+.navbar-middle a:hover::after {
+    visibility: visible;
+    width: 100%;
+}
+
+.navbar-right .login-button {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #0044cc;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-right .login-button:hover {
+    background-color: #cc9900;
+    transform: scale(1.1);
+}
+
+
+
+
+
+
+
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+
+
+/* Dropdown styles */
+.contact-dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.contact-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
